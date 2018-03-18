@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Driver {
 
@@ -9,11 +10,11 @@ public class Driver {
 	private static Set<String> dependentFriends = new HashSet<>();
 	private static List<Person> allPeople = new ArrayList<>();
 
-	public static void main(String[] args) {
-		System.out.println("Start..");
+	public Driver() {
+		init();
 	}
 
-	public static void init() {
+	public void init() {
 		new HardCodedDataLoader().loadDataToArrayList(allPeople);
 	}
 
@@ -73,5 +74,29 @@ public class Driver {
 		}
 
 		return false;
+	}
+
+	public List<Adult> getAllAdults() {
+		return allPeople.stream()
+				.filter(p -> p instanceof Adult)
+				.map (p -> (Adult) p)
+			    .collect(Collectors.toList());
+	}
+
+	public List<Dependent> getAllDependents() {
+		return allPeople.stream()
+				.filter(p -> p instanceof Dependent)
+				.map (p -> (Dependent) p)
+			    .collect(Collectors.toList());
+	}
+
+	public List<Person> getAllPeople() {
+		return allPeople;
+	}
+
+	public void delete(Person person) {
+		this.getAllPeople().remove(person);
+		this.getAllAdults().remove(person);
+		this.getAllDependents().remove(person);
 	}
 }

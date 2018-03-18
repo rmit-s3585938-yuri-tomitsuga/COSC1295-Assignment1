@@ -56,5 +56,7 @@ public abstract class Person {
 		this.status = status;
 	}
 
+	public abstract boolean delete();
+
 
 }

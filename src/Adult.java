@@ -26,17 +26,20 @@ public class Adult extends Person{
 	 * @param spouse the spouse to set
 	 */
 	public void getMarryWith(Adult spouse) {
-		if (this.spouse != null) {
+		if (this.spouse != null && spouse != this.spouse) {
 			throw new IllegalArgumentException(this.getName()
 								+ " is married with " + this.getSpouse().getName());
-		} else if (this.spouse.getSpouse() != null) {
-			throw new IllegalArgumentException(this.getSpouse().getName()
+		} else if (spouse.getSpouse() != null && this != spouse.spouse) {
+			throw new IllegalArgumentException(spouse.getName()
 								+ " is married with "
-								+ this.getSpouse().getSpouse().getName());
+								+ spouse.getSpouse().getName());
 		}
 
 		this.spouse = spouse;
-		spouse.getMarryWith(this);
+		if (spouse.getSpouse() == null) {
+			spouse.getMarryWith(this);
+		}
+
 	}
 
 	/**
@@ -56,5 +59,41 @@ public class Adult extends Person{
 		getChildren().add(child);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getName());
+		sb.append(" ");
+		sb.append(getAge());
+		sb.append(" years old.\n");
+		if (getSpouse() != null) {
+			sb.append("Married with ");
+			sb.append(getSpouse().getName());
+			sb.append(".\n");
+		}
+
+		if (getChildren().size() > 0) {
+			sb.append("Has children ");
+			for (Dependent d: getChildren()) {
+				sb.append(d.getName() + " ");
+			}
+			sb.append("\n");
+		}
+		if (getStatus() != null) {
+			sb.append(getStatus());
+		}
+
+		return sb.toString();
+	}
+
+	@Override
+	public boolean delete() {
+		if (this.spouse != null) {
+			System.out.println(getName() + " cannot be deleted, he/shw still has spouse, deletion will break data integrity.");
+			return false;
+		}
+
+		return false;
+	}
 
 }
