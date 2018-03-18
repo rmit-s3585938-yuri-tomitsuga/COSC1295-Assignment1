@@ -1,24 +1,42 @@
-import java.util.ArrayList;
-import java.util.List;
+public abstract class Person {
 
-public abstract class Person <X> {
+	private String name;
 
-	private List<X> friends;
-	
-	public List<X> getFriends() {
-		if (friends == null) {
-			friends = new ArrayList<X>();
-		}
-		return friends;
+	private int age;
+
+	public Person(String name, int age) {
+		this.name = name;
+		this.age = age;
 	}
 
-	public void setFriends(List<X> friends) {
-		this.friends = friends;
+	public Person(String a) {
+
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 
-	abstract boolean addFriend(X friend);
-	
-	abstract boolean deleteFriend(X friend);
-	
-	abstract boolean findFriend(X friend);
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the age
+	 */
+	public int getAge() {
+		return age;
+	}
+
+	/**
+	 * @param age the age to set
+	 */
+	public void setAge(int age) {
+		this.age = age;
+	}
 }

@@ -1,22 +1,19 @@
 
-public class Dependent extends Person<Dependent> {
+public class Dependent extends Person {
 
-	@Override
-	boolean addFriend(Dependent friend) {
-		// TODO Auto-generated method stub
-		return false;
+	public Dependent(String name, int age, Adult p1, Adult p2) {
+		super(name, age);
+		if (age >= 16) {
+			throw new IllegalArgumentException("Too old to be a dependent.");
+		}
+		parent1 = p1;
+		parent2 = p2;
+
 	}
 
-	@Override
-	boolean deleteFriend(Dependent friend) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	private Adult parent1;
 
-	@Override
-	boolean findFriend(Dependent friend) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	private Adult parent2;
+
 
 }
