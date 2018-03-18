@@ -14,17 +14,11 @@ public class Driver {
 	}
 
 	public static void init() {
-		Adult ned = new Adult("Ned", 47);
-		Adult catelyn = new Adult("Catelyn", 43);
-		ned.getMarryWith(catelyn);
+		new HardCodedDataLoader().loadDataToArrayList(allPeople);
+	}
 
-		Dependent bran = new Dependent("Bran", 13, ned, catelyn);
-		Dependent robb = new Dependent("Robb", 15, ned, catelyn);
-
-		allPeople.add(ned);
-		allPeople.add(catelyn);
-		allPeople.add(bran);
-		allPeople.add(robb);
+	public void addPersonToNetwork(Person p) {
+		allPeople.add(p);
 	}
 
 	public Person selectPersonByName(String name) {
@@ -41,11 +35,11 @@ public class Driver {
 	}
 
 
-	public void makeAdultFriends(Adult a1, Adult a2) {
+	public void makeFriends(Adult a1, Adult a2) {
 		adultFriends.add(a1.getName() + "-" + a2.getName());
 	}
 
-	public void makeDependentFriends(Dependent d1, Dependent d2) {
+	public void makeFriends(Dependent d1, Dependent d2) {
 		if (d1.getAge() < 3) {
 			throw new IllegalArgumentException("Dependent " + d1.getName() + " is too young to have a friend.");
 		} else if (d2.getAge() < 3) {
@@ -55,5 +49,29 @@ public class Driver {
 		}
 
 		dependentFriends.add(d1.getName() + "-" + d2.getName());
+	}
+
+	public boolean checkFriendship(Adult a1, Adult a2) {
+		if (adultFriends.contains(a1.getName() + "-" + a2.getName())) {
+			return true;
+		}
+
+		if (adultFriends.contains(a2.getName() + "-" + a1.getName())) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean checkFriendship(Dependent d1, Dependent d2) {
+		if (dependentFriends.contains(d1.getName() + "-" + d2.getName())) {
+			return true;
+		}
+
+		if (dependentFriends.contains(d2.getName() + "-" + d1.getName())) {
+			return true;
+		}
+
+		return false;
 	}
 }

@@ -4,6 +4,8 @@ public abstract class Person {
 
 	private int age;
 
+	private String status;
+
 	public Person(String name, int age) {
 		this.name = name;
 		this.age = age;
@@ -39,4 +41,20 @@ public abstract class Person {
 	public void setAge(int age) {
 		this.age = age;
 	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 }
