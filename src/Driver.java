@@ -16,6 +16,11 @@ public class Driver {
 
 	public void init() {
 		new HardCodedDataLoader().loadDataToArrayList(allPeople);
+		makeFriends(selectPersonByName("bran"), selectPersonByName("rickon"));
+		makeFriends(selectPersonByName("sansa"), selectPersonByName("rickon"));
+		makeFriends(selectPersonByName("arya"), selectPersonByName("sansa"));
+		makeFriends(selectPersonByName("robb"), selectPersonByName("sansa"));
+		makeFriends(selectPersonByName("joffrey"), selectPersonByName("tommen"));
 	}
 
 	public void addPersonToNetwork(Person p) {
@@ -52,6 +57,22 @@ public class Driver {
 		dependentFriends.add(d1.getName() + "-" + d2.getName());
 	}
 
+	public void makeFriends(Person p1, Person p2) {
+		if (p1 instanceof Adult && p2 instanceof Adult) {
+			makeFriends((Adult)p1, (Adult)p2);
+			System.out.println("Adult " + p1.getName()+ " and " + p2.getName() + " are friends now.");
+			return;
+		}
+
+		if (p1 instanceof Dependent && p2 instanceof Dependent) {
+			makeFriends((Dependent)p1, (Dependent)p2);
+			System.out.println("Dependent " + p1.getName()+ " and " + p2.getName() + " are friends now.");
+			return;
+		}
+		System.out.println("Adult cannot make friends with dependent.");
+
+	}
+
 	public boolean checkFriendship(Adult a1, Adult a2) {
 		if (adultFriends.contains(a1.getName() + "-" + a2.getName())) {
 			return true;
@@ -75,6 +96,19 @@ public class Driver {
 
 		return false;
 	}
+
+	public boolean checkFriendship(Person p1, Person p2) {
+		if (p1 instanceof Adult && p2 instanceof Adult) {
+			return checkFriendship((Adult)p1, (Adult)p2);
+		}
+
+		if (p1 instanceof Dependent && p2 instanceof Dependent) {
+			return checkFriendship((Dependent)p1, (Dependent)p2);
+		}
+
+		return false;
+	}
+
 
 	public List<Adult> getAllAdults() {
 		return allPeople.stream()

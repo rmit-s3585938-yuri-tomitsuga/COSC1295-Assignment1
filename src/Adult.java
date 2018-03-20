@@ -89,11 +89,11 @@ public class Adult extends Person{
 	@Override
 	public boolean delete() {
 		if (this.spouse != null) {
-			System.out.println(getName() + " cannot be deleted, he/shw still has spouse, deletion will break data integrity.");
+			System.out.println(getName() + " cannot be deleted, he/she still has spouse, deletion will break data integrity.");
 			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 }

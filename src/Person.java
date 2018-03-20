@@ -6,6 +6,8 @@ public abstract class Person {
 
 	private String status;
 
+	private String photo;
+
 	public Person(String name, int age) {
 		this.name = name;
 		this.age = age;
@@ -58,5 +60,17 @@ public abstract class Person {
 
 	public abstract boolean delete();
 
+	/**
+	 * @return the photo
+	 */
+	public String getPhoto() {
+		return photo;
+	}
 
+	/**
+	 * @param photo the photo to set
+	 */
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 }

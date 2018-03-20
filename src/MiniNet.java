@@ -22,6 +22,8 @@ public class MiniNet {
 		Driver driver = new Driver();
 		String input = "";
 		while (true) {
+
+			try {
 			System.out.println(MENU);
 			Scanner scanner = new Scanner(System.in);
 			input = scanner.nextLine().trim();
@@ -47,7 +49,7 @@ public class MiniNet {
 					p = Pattern.compile("\\d \\d");
 					m = p.matcher(input);
 					if(!m.matches()) {
-
+						continue;
 					}
 					int num1 = Integer.parseInt(input.split(" ")[0]);
 					int num2 = Integer.parseInt(input.split(" ")[1]);
@@ -124,12 +126,59 @@ public class MiniNet {
 					System.err.println("Cannot find " + input);
 				}
 				break;
-			case "8": break;
-			case "9": break;
+			case "8":
+				for (int i = 0; i < driver.getAllPeople().size(); i++) {
+					System.out.println(i + ". " + driver.getAllPeople().get(i).getName());
+				}
+				System.out.println("\nChoose two people to see if they are friends " + ENTER_HINT);
+				input = scanner.nextLine().trim();
+				p = Pattern.compile("\\d \\d");
+				m = p.matcher(input);
+				if(!m.matches()) {
+					continue;
+				}
+				num1 = Integer.parseInt(input.split(" ")[0]);
+				int num2 = Integer.parseInt(input.split(" ")[1]);
+				if (num1 < 0 || num1 > driver.getAllPeople().size()-1) {
+					System.out.println("Invalid input!");
+				} else if (num2 < 0 || num2 > driver.getAllPeople().size()-1) {
+					System.out.println("Invalid input!");
+				} else {
+					driver.makeFriends(driver.getAllPeople().get(num1), driver.getAllPeople().get(num2));
+				}
+				break;
+			case "9":
+				for (int i = 0; i < driver.getAllPeople().size(); i++) {
+					System.out.println(i + ". " + driver.getAllPeople().get(i).getName());
+				}
+				System.out.println("\nChoose two people to see if they are friends " + ENTER_HINT);
+				input = scanner.nextLine().trim();
+				p = Pattern.compile("\\d \\d");
+				m = p.matcher(input);
+				if(!m.matches()) {
+					continue;
+				}
+				num1 = Integer.parseInt(input.split(" ")[0]);
+				num2 = Integer.parseInt(input.split(" ")[1]);
+				if (num1 < 0 || num1 > driver.getAllPeople().size()-1) {
+					System.out.println("Invalid input!");
+				} else if (num2 < 0 || num2 > driver.getAllPeople().size()-1) {
+					System.out.println("Invalid input!");
+				} else {
+					if(driver.checkFriendship(driver.getAllPeople().get(num1), driver.getAllPeople().get(num2))) {
+						System.out.println(driver.getAllPeople().get(num1).getName() + " and " + driver.getAllPeople().get(num2).getName() + " are friends");
+					} else {
+						System.out.println("they are not friends!");
+					}
+				}
+				break;
 			case "10":
 				System.exit(0);
 			default:
 				System.err.println("Invalid input, please enter 1-7.");
+			}
+			}catch (IllegalArgumentException e) {
+				e.printStackTrace();
 			}
 		}
 
