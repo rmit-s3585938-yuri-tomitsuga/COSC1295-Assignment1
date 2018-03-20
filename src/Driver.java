@@ -14,6 +14,9 @@ public class Driver {
 		init();
 	}
 
+	/**
+	 * Init connections
+	 */
 	public void init() {
 		new HardCodedDataLoader().loadDataToArrayList(allPeople);
 		makeFriends(selectPersonByName("bran"), selectPersonByName("rickon"));
@@ -23,10 +26,20 @@ public class Driver {
 		makeFriends(selectPersonByName("joffrey"), selectPersonByName("tommen"));
 	}
 
+
+	/**
+	 * add person to the list
+	 * @param p
+	 */
 	public void addPersonToNetwork(Person p) {
 		allPeople.add(p);
 	}
 
+	/**
+	 * search a person by name
+	 * @param name
+	 * @return
+	 */
 	public Person selectPersonByName(String name) {
 		if (name == null || "".equals(name)) {
 			throw new IllegalArgumentException("Name cannot by null or empty!");
@@ -41,10 +54,20 @@ public class Driver {
 	}
 
 
+	/**
+	 * two adults make friend
+	 * @param a1
+	 * @param a2
+	 */
 	public void makeFriends(Adult a1, Adult a2) {
 		adultFriends.add(a1.getName() + "-" + a2.getName());
 	}
 
+	/**
+	 * two dependent make friend
+	 * @param d1
+	 * @param d2
+	 */
 	public void makeFriends(Dependent d1, Dependent d2) {
 		if (d1.getAge() < 3) {
 			throw new IllegalArgumentException("Dependent " + d1.getName() + " is too young to have a friend.");
@@ -57,6 +80,11 @@ public class Driver {
 		dependentFriends.add(d1.getName() + "-" + d2.getName());
 	}
 
+	/**
+	 * two person make friend
+	 * @param p1
+	 * @param p2
+	 */
 	public void makeFriends(Person p1, Person p2) {
 		if (p1 instanceof Adult && p2 instanceof Adult) {
 			makeFriends((Adult)p1, (Adult)p2);
@@ -73,6 +101,12 @@ public class Driver {
 
 	}
 
+	/**
+	 * check if two adults are friends
+	 * @param a1
+	 * @param a2
+	 * @return
+	 */
 	public boolean checkFriendship(Adult a1, Adult a2) {
 		if (adultFriends.contains(a1.getName() + "-" + a2.getName())) {
 			return true;
@@ -85,6 +119,12 @@ public class Driver {
 		return false;
 	}
 
+	/**
+	 * check if two dependents are friends
+	 * @param d1
+	 * @param d2
+	 * @return
+	 */
 	public boolean checkFriendship(Dependent d1, Dependent d2) {
 		if (dependentFriends.contains(d1.getName() + "-" + d2.getName())) {
 			return true;
@@ -97,6 +137,12 @@ public class Driver {
 		return false;
 	}
 
+	/**
+	 * check if two person are friends
+	 * @param p1
+	 * @param p2
+	 * @return
+	 */
 	public boolean checkFriendship(Person p1, Person p2) {
 		if (p1 instanceof Adult && p2 instanceof Adult) {
 			return checkFriendship((Adult)p1, (Adult)p2);
@@ -110,6 +156,10 @@ public class Driver {
 	}
 
 
+	/**
+	 * get all adults
+	 * @return
+	 */
 	public List<Adult> getAllAdults() {
 		return allPeople.stream()
 				.filter(p -> p instanceof Adult)
@@ -117,6 +167,10 @@ public class Driver {
 			    .collect(Collectors.toList());
 	}
 
+	/**
+	 * get all dependents
+	 * @return
+	 */
 	public List<Dependent> getAllDependents() {
 		return allPeople.stream()
 				.filter(p -> p instanceof Dependent)
@@ -124,10 +178,18 @@ public class Driver {
 			    .collect(Collectors.toList());
 	}
 
+	/**
+	 * get all people
+	 * @return
+	 */
 	public List<Person> getAllPeople() {
 		return allPeople;
 	}
 
+	/**
+	 * delete a person from three lists
+	 * @param person
+	 */
 	public void delete(Person person) {
 		this.getAllPeople().remove(person);
 		this.getAllAdults().remove(person);

@@ -53,7 +53,7 @@ public class Adult extends Person{
 	}
 
 	/**
-	 * @param children the children to set
+	 * @param children the children to add
 	 */
 	public void addChildren(Dependent child) {
 		getChildren().add(child);
