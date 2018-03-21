@@ -15,13 +15,13 @@ public class HardCodedDataLoader implements DataLoader{
 		Dependent bran = new Dependent("bran", 13, ned, catelyn);
 		Dependent robb = new Dependent("robb", 15, ned, catelyn);
 		Dependent arya = new Dependent("arya", 10, ned, catelyn);
-		Dependent sansa = new Dependent("sansa", 7, ned, catelyn);
-		Dependent rickon = new Dependent("rickon", 4, ned, catelyn);
+		Dependent sansa = new Dependent("sansa", 13, ned, catelyn);
+		Dependent rickon = new Dependent("rickon", 14, ned, catelyn);
 
 		Adult cersei = new Adult("cersei", 40);
 		Adult jaime = new Adult("jaime", 43);
 
-		Dependent joffrey = new Dependent("joffrey", 4, cersei, jaime);
+		Dependent joffrey = new Dependent("joffrey", 12, cersei, jaime);
 		Dependent tommen = new Dependent("tommen", 14, cersei, jaime);
 		Dependent myrcella = new Dependent("myrcella", 15, cersei, jaime);
 

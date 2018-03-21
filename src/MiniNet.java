@@ -100,14 +100,14 @@ public class MiniNet {
 				System.out.println("Select the person by id number");
 				input = scanner.nextLine().trim();
 				int num1 = Integer.parseInt(input);
-				if (num1 < 0 || num1 > driver.getAllAdults().size()-1) {
+				if (num1 < 0 || num1 > driver.getAllPeople().size()-1) {
 					System.out.println("Invalid input!");
 				} else {
-					System.out.println(driver.getAllAdults().get(num1));
+					System.out.println(driver.getAllPeople().get(num1));
 					System.out.println("Enter the new status");
 					input = scanner.nextLine().trim();
-					driver.getAllAdults().get(num1).setStatus(input);
-					System.out.println(driver.getAllAdults().get(num1));
+					driver.getAllPeople().get(num1).setStatus(input);
+					System.out.println(driver.getAllPeople().get(num1));
 				}
 				break;
 			case "7":
@@ -177,8 +177,8 @@ public class MiniNet {
 			default:
 				System.err.println("Invalid input, please enter 1-7.");
 			}
-			}catch (IllegalArgumentException e) {
-				e.printStackTrace();
+			}catch (Exception e) {
+//				e.printStackTrace();
 			}
 		}
 
